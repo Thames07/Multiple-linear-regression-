@@ -1,0 +1,302 @@
+
+R version 4.2.0 (2022-04-22) -- "Vigorous Calisthenics"
+Copyright (C) 2022 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin17.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[R.app GUI 1.78 (8075) x86_64-apple-darwin17.0]
+
+[Workspace restored from /Users/mba/.RData]
+[History restored from /Users/mba/.Rapp.history]
+
+2023-01-31 12:14:26.020 R[1962:54173] +[NSSavePanel _warmUp] obviated
+> library(xlsx)
+> data<-read.csv('mtcars.csv')
+Error in file(file, "rt") : cannot open the connection
+In addition: Warning message:
+In file(file, "rt") :
+  cannot open file 'mtcars.csv': No such file or directory
+> data1<-mtcars[,c('mpg','disp','hp','wt')]
+> View(data1)
+xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+Error in View(data1) : X11 dataentry cannot be loaded
+In addition: Warning messages:
+1: In system2("/usr/bin/otool", c("-L", shQuote(DSO)), stdout = TRUE) :
+  running command ''/usr/bin/otool' -L '/Library/Frameworks/R.framework/Resources/modules/R_de.so'' had status 1
+2: In View(data1) :
+  unable to load shared object '/Library/Frameworks/R.framework/Resources/modules//R_de.so':
+  dlopen(/Library/Frameworks/R.framework/Resources/modules//R_de.so, 6): Library not loaded: /opt/X11/lib/libSM.6.dylib
+  Referenced from: /Library/Frameworks/R.framework/Versions/4.2/Resources/modules/R_de.so
+  Reason: image not found
+> setwd()
+Error in setwd() : argument "dir" is missing, with no default
+> setwd("")
+Error in setwd("") : cannot change working directory
+> print(getwd())
+[1] "/Users/mba"
+> setwd("/Users/mba")
+> print(getwd())
+[1] "/Users/mba"
+> library(xlsx)
+> data<-read.csv('mtcars.csv')
+Error in file(file, "rt") : cannot open the connection
+In addition: Warning message:
+In file(file, "rt") :
+  cannot open file 'mtcars.csv': No such file or directory
+> data<-read.csv('mtcars.csv')
+Error in file(file, "rt") : cannot open the connection
+In addition: Warning message:
+In file(file, "rt") :
+  cannot open file 'mtcars.csv': No such file or directory
+> 
+> setwd("~/dir")
+Error in setwd("~/dir") : cannot change working directory
+> setwd("/Users/mba/Desktop/mtcars.csv")
+> data<-read.csv('mtcars.csv')
+> data1<-mtcars[,c('mpg','disp','hp','wt')]
+> View(data1)
+Error in View(data1) : X11 dataentry cannot be loaded
+In addition: Warning message:
+In system2("/usr/bin/otool", c("-L", shQuote(DSO)), stdout = TRUE) :
+  running command ''/usr/bin/otool' -L '/Library/Frameworks/R.framework/Resources/modules/R_de.so'' had status 1
+xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+> install.packages(“psych”)
+Error: unexpected input in "install.packages(“"
+> install.packages('psych')
+--- Please select a CRAN mirror for use in this session ---
+trying URL 'https://cloud.r-project.org/bin/macosx/contrib/4.2/psych_2.2.9.tgz'
+Content type 'application/x-gzip' length 3826607 bytes (3.6 MB)
+==================================================
+downloaded 3.6 MB
+
+
+The downloaded binary packages are in
+	/var/folders/s3/lqgswjqd2flbfms2jz_nc5580000gn/T//Rtmpo9HA1Q/downloaded_packages
+> library('psych')
+> corr.test(data1)
+Call:corr.test(x = data1)
+Correlation matrix 
+       mpg  disp    hp    wt
+mpg   1.00 -0.85 -0.78 -0.87
+disp -0.85  1.00  0.79  0.89
+hp   -0.78  0.79  1.00  0.66
+wt   -0.87  0.89  0.66  1.00
+Sample Size 
+[1] 32
+Probability values (Entries above the diagonal are adjusted for multiple tests.) 
+     mpg disp hp wt
+mpg    0    0  0  0
+disp   0    0  0  0
+hp     0    0  0  0
+wt     0    0  0  0
+
+ To see confidence intervals of the correlations, print with the short=FALSE option
+> linear_model<-lm(mpg~disp+hp+wt,data=data1)
+> print(linear_model)
+
+Call:
+lm(formula = mpg ~ disp + hp + wt, data = data1)
+
+Coefficients:
+(Intercept)         disp           hp           wt  
+  37.105505    -0.000937    -0.031157    -3.800891  
+
+> summary(linear_model)
+
+Call:
+lm(formula = mpg ~ disp + hp + wt, data = data1)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-3.891 -1.640 -0.172  1.061  5.861 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 37.105505   2.110815  17.579  < 2e-16 ***
+disp        -0.000937   0.010350  -0.091  0.92851    
+hp          -0.031157   0.011436  -2.724  0.01097 *  
+wt          -3.800891   1.066191  -3.565  0.00133 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 2.639 on 28 degrees of freedom
+Multiple R-squared:  0.8268,	Adjusted R-squared:  0.8083 
+F-statistic: 44.57 on 3 and 28 DF,  p-value: 8.65e-11
+
+> hist(linear_model$residuals,col=75)
+> install.packages('nortest')
+trying URL 'https://cloud.r-project.org/bin/macosx/contrib/4.2/nortest_1.0-4.tgz'
+Content type 'application/x-gzip' length 36434 bytes (35 KB)
+==================================================
+downloaded 35 KB
+
+
+The downloaded binary packages are in
+	/var/folders/s3/lqgswjqd2flbfms2jz_nc5580000gn/T//Rtmpo9HA1Q/downloaded_packages
+> library(nortest)
+> ad.test(linear_model$residuals)
+
+	Anderson-Darling normality test
+
+data:  linear_model$residuals
+A = 0.66605, p-value = 0.07445
+
+> par(mfrow = c(2, 2))
+> plot(linear_model)
+> confint(linear_model)
+                  2.5 %       97.5 %
+(Intercept) 32.78169625 41.429314293
+disp        -0.02213750  0.020263482
+hp          -0.05458171 -0.007731388
+wt          -5.98488310 -1.616898063
+> find<-data.frame(disp=150,hp=170,wt=3.089)
+> predict(linear_model,find)
+       1 
+19.92739 
+> my_data<-mtcars[,c('am','wt')]
+> View(my_data)
+Error in View(my_data) : X11 dataentry cannot be loaded
+In addition: Warning message:
+In system2("/usr/bin/otool", c("-L", shQuote(DSO)), stdout = TRUE) :
+  running command ''/usr/bin/otool' -L '/Library/Frameworks/R.framework/Resources/modules/R_de.so'' had status 1
+xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+> my_data
+                    am    wt
+Mazda RX4            1 2.620
+Mazda RX4 Wag        1 2.875
+Datsun 710           1 2.320
+Hornet 4 Drive       0 3.215
+Hornet Sportabout    0 3.440
+Valiant              0 3.460
+Duster 360           0 3.570
+Merc 240D            0 3.190
+Merc 230             0 3.150
+Merc 280             0 3.440
+Merc 280C            0 3.440
+Merc 450SE           0 4.070
+Merc 450SL           0 3.730
+Merc 450SLC          0 3.780
+Cadillac Fleetwood   0 5.250
+Lincoln Continental  0 5.424
+Chrysler Imperial    0 5.345
+Fiat 128             1 2.200
+Honda Civic          1 1.615
+Toyota Corolla       1 1.835
+Toyota Corona        0 2.465
+Dodge Challenger     0 3.520
+AMC Javelin          0 3.435
+Camaro Z28           0 3.840
+Pontiac Firebird     0 3.845
+Fiat X1-9            1 1.935
+Porsche 914-2        1 2.140
+Lotus Europa         1 1.513
+Ford Pantera L       1 3.170
+Ferrari Dino         1 2.770
+Maserati Bora        1 3.570
+Volvo 142E           1 2.780
+> cor.test(my_data$am,my_data$wt,method='pearson')
+
+	Pearson's product-moment correlation
+
+data:  my_data$am and my_data$wt
+t = -5.2576, df = 30, p-value = 1.125e-05
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.8386752 -0.4532461
+sample estimates:
+       cor 
+-0.6924953 
+
+> table(my_data$am)
+
+ 0  1 
+19 13 
+> train_one<-my_data[which(my_data$am==1),]
+> train_zero<-my_data[which(my_data$am==0),]
+> train_1<-sample(1:nrow(train_one), 0.7*nrow(train_one))
+> train_0<-sample(1:nrow(train_zero), 0.7*nrow(train_zero))
+> training_1<-train_one[train_1,]
+> training_0<-train_zero[train_0,]
+> train<-rbind(training_1,training_0)
+> testing_1<-train_one[-train_1,]
+> testing_0<-train_zero[-train_0,]
+> test<-rbind(testing_1,testing_0)
+> linear_model<-glm(am ~ wt,data = train,family='binomial')
+> print(linear_model)
+
+Call:  glm(formula = am ~ wt, family = "binomial", data = train)
+
+Coefficients:
+(Intercept)           wt  
+     17.675       -5.721  
+
+Degrees of Freedom: 21 Total (i.e. Null);  20 Residual
+Null Deviance:	    29.77 
+Residual Deviance: 9.867 	AIC: 13.87
+> summary(linear_model)
+
+Call:
+glm(formula = am ~ wt, family = "binomial", data = train)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-1.03401  -0.45802  -0.12387   0.09618   2.37151  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)  
+(Intercept)   17.675      8.438   2.095   0.0362 *
+wt            -5.721      2.618  -2.186   0.0288 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 29.7671  on 21  degrees of freedom
+Residual deviance:  9.8666  on 20  degrees of freedom
+AIC: 13.867
+
+Number of Fisher Scoring iterations: 7
+
+> pp<-plogis(predict(linear_model,test))
+> print(round(pp,digits = 3))
+     Toyota Corolla       Porsche 914-2      Ford Pantera L          Volvo 142E      Hornet 4 Drive          Duster 360  Cadillac Fleetwood Lincoln Continental       Toyota Corona         AMC Javelin 
+              0.999               0.996               0.387               0.854               0.328               0.060               0.000               0.000               0.973               0.122 
+> install.packages('InformationValue')
+Warning message:
+package ‘InformationValue’ is not available for this version of R
+
+A version of this package for your version of R might be available elsewhere,
+see the ideas at
+https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages 
+2023-01-31 12:42:56.033 R[1962:54173] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2023-01-31 12:42:56.033 R[1962:54173] nil host used in call to allowsAnyHTTPSCertificateForHost:
+> update.packages()
+BH :
+ Version 1.78.0-0 installed in /Library/Frameworks/R.framework/Versions/4.2/Resources/library 
+ Version 1.81.0-1 available at https://cloud.r-project.org
+Update? (Yes/no/cancel) Yes
+bit :
+ Version 4.0.4 installed in /Library/Frameworks/R.framework/Versions/4.2/Resources/library 
+ Version 4.0.5 available at https://cloud.r-project.org
+Update? (Yes/no/cancel) yes
+boot :
+ Version 1.3-28 installed in /Library/Frameworks/R.framework/Versions/4.2/Resources/library 
+ Version 1.3-28.1 available at https://cloud.r-project.org
+Update? (Yes/no/cancel) Yes
+broom :
+ Version 1.0.1 installed in /Library/Frameworks/R.framework/Versions/4.2/Resources/library 
+ Version 1.0.3 available at https://cloud.r-project.org
+Update? (Yes/no/cancel) 
